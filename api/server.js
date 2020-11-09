@@ -12,6 +12,11 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
+
+    app.options('*', (req, res) => {
+        res.header('Access-Control-Allow-Methods', 'GET, PATCH, PUT, POST, DELETE, OPTIONS');
+        res.send();
+    });
 });
 
 app.get('/persons', (req, res) => {
@@ -24,6 +29,14 @@ app.get('/persons', (req, res) => {
 
 app.get('/person/:number', (req, res) => {
     axios.get(`https://swapi.dev/api/people/${req.params.number}`).then(result => {
+        res.status(200).json(result.data);
+    }).catch(error => {
+        console.log(error)
+    })
+})
+
+app.get('/person/search/:name', (req, res) => {
+    axios.get(`https://swapi.dev/api/people/?search=${req.params.name}`).then(result => {
         res.status(200).json(result.data);
     }).catch(error => {
         console.log(error)
