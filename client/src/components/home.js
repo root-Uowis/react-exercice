@@ -35,7 +35,7 @@ const Home = () => {
         (async () => {
             await axios.get(`http://localhost:4242/persons`).then(data => {
                 console.log(data.data.results);
-                for (let v = 1; v < 9; v++) {
+                for (let v = 1; v < 10; v++) {
                     axios.get(`http://localhost:4242/person/${v}`).then(data => {
                         for (let v = 0; v < 1; v++) {
                             var infos = data.data
@@ -99,10 +99,6 @@ const Home = () => {
                                         <Typography variant="body2" color="textSecondary">
                                             {'Gender : ' + l.gender}
                                         </Typography>
-                                    </Grid>
-
-                                    <Grid item>
-                                        <Typography variant="subtitle1"></Typography>
                                     </Grid>
                                 </Grid>
                                 {/* <Grid item>
